@@ -47,6 +47,14 @@ function App() {
     return null
   }
 
+  const checkEndGame = (newBoard) => {
+    // Revisamos si hay un empate
+    // Si no hay más espacios vacios en el tablero
+
+    // newBoard = [null, null, null, null, null, null, null, null] entonces verificamos todos los null de new board, si new board es distinto de null, es decir ya no hay espacio vacio en el tablero
+    return newBoard.every((square) => square !== null)
+  }
+
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
@@ -67,17 +75,21 @@ function App() {
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       setWinner(newWinner)
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false) // Empate
     }
   }
 
   return (
     <main className="board">
       <h1>TA TE TI</h1>
+      <button onClick={resetGame}>Reiniciar Juego</button>
       <section className="game">
-        {board.map((_, index) => {
+        {/* La primera posición es un square, entonces indicamos que de la primera posición hasta la ultima del index, va a ser square */}
+        {board.map((square, index) => {
           return (
             <Square key={index} index={index} updateBoard={updateBoard}>
-              {board[index]}
+              {square}
             </Square>
           );
         })}
