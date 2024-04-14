@@ -47,6 +47,12 @@ function App() {
     return null
   }
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setTurn(TURNS.X);
+    setWinner(null)
+  }
+
   const updateBoard = (index) => {
     // Si el board ya tiene algo, no se actualiza (n ose sobreescribe)
     if (board[index] || winner) return
@@ -81,6 +87,30 @@ function App() {
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
+
+      {
+        winner !== null && (
+          <section className="winner">
+            <div className="text">
+              <h2>
+                {
+                  winner === false
+                    ? 'Empate'
+                    : 'Ganó:'
+                }
+              </h2>
+
+              <header className="win">
+                { winner && <Square>{winner}</Square>}
+              </header>
+
+              <footer>
+                <button onClick={resetGame}>Empezar de nuevo</button>
+              </footer>
+            </div>
+          </section>
+        )
+      }
     </main>
   );
 }
