@@ -24,6 +24,6 @@ export function Movies ({ movies }) {
     return (
             hasMovies
             ? <ListOfMovies movies={movies} />
-            : <renderNoResults />
+            : < NoMoviesResults />
     )
 }

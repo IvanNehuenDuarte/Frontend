@@ -39,10 +39,6 @@ function App() {
   const { search, updateSearch, error } = useSearch();
   const { movies, loading, getMovies } = useMovies({ search });
 
-  const counter = useRef(0); //* Valor que persiste entre renders
-  counter.current++;
-  console.log(counter.current);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     getMovies();
