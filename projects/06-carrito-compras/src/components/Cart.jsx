@@ -1,39 +1,52 @@
-import './Cart.css'
+import "./Cart.css";
 
-import { useId } from 'react'
-import { CartIcon, ClearCartIcon } from './Icons.jsx'
+import { useId } from "react";
+import { CartIcon, ClearCartIcon } from "./Icons.jsx";
+import { useCart } from "../hooks/useCart.js";
 
-export function Cart () {
-    const cartCheckBoxId = useId()
+function CartItem({ thumbnail, price, title, quantity, addToCart }) {
+  return (
+    <li>
+      <img
+        src={thumbnail}
+        alt={title}
+      />
+      <div>
+        <strong>{title}</strong> - ${price}
+      </div>
 
-    return (
-        <>
-            <label className='cart-button' htmlFor={cartCheckBoxId}>
-                <CartIcon />
-            </label>
-            <input id={cartCheckBoxId} type='checkbox' hidden />
+      <footer>
+        <small>Qty: {quantity}</small>
+        <button onClick={addToCart}>+</button>
+      </footer>
+    </li>
+  );
+}
 
-            <aside className='cart' >
-                <ul>
-                    <li>
-                        <img src="https://cdn.dummyjson.com/product-images/2/thumbnail.jpg" alt="Iphone" />
-                        <div>
-                            <strong>Iphone</strong> - $1499
-                        </div>
+export function Cart() {
+  const cartCheckBoxId = useId();
+  const { cart, clearCart, addToCart } = useCart();
 
-                        <footer>
-                            <small>
-                                Qty: 1
-                            </small>
-                            <button>+</button>
-                        </footer>
-                    </li>
-                </ul>
+  return (
+    <>
+      <label className="cart-button" htmlFor={cartCheckBoxId}>
+        <CartIcon />
+      </label>
+      <input id={cartCheckBoxId} type="checkbox" hidden />
 
-                <button>
-                    <ClearCartIcon/>
-                </button>
-            </aside>
-        </>
-    )
+      <aside className="cart">
+        <ul>
+            {cart.map(product => (
+                <CartItem key={product.id}
+                addToCart={() => addToCart(product)}
+                {...product} />
+            ))}
+        </ul>
+
+        <button onClick={clearCart}>
+          <ClearCartIcon />
+        </button>
+      </aside>
+    </>
+  );
 }
