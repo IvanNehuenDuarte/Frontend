@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { EVENTS } from "./consts";
 
 export function navigate(href) {
