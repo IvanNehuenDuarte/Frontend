@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { EVENTS } from "./consts";
+import { EVENTS } from "../utils/consts";
 
 export function navigate(href) {
   window.history.pushState({}, "", href);
