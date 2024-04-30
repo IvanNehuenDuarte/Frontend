@@ -9,7 +9,7 @@ const error404 = document.querySelector(".not-found");
 search.addEventListener("click", () => {
 
     // Clave API. Obtenemos la ciudad escrita por el usuario.
-  const APIKey = "8bfca1d8ff4bdf44278d523f1344745a";
+  const APIKey = '8bfca1d8ff4bdf44278d523f1344745a';
   const city = document.querySelector(".search-box input").value;
     // Si es vacío retornamos
   if (city === "") return;
